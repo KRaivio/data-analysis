@@ -14,10 +14,10 @@ app.use(bodyParser.raw());
 app.post('/ruuvigw', (req, res) => {
     const Influx = require('influxdb-nodejs');
 
-    data = req.body;
-    datat = data['tags']
-    datarow = JSON.stringify(datat)
-    if (datarow.length) {
+    data = req.body;    
+    if (data.hasOwnProperty('tags')) {
+        datat = data['tags']
+        datarow = JSON.stringify(datat)
         dataa = datat[0]
         console.log('Got data:', dataa['updateAt'] + ': ' + dataa['temperature'] + ', ' + dataa['id']);
         mac_old = dataa['id']
